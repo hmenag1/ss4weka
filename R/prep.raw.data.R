@@ -49,9 +49,9 @@ fixDateTime <- function(datdate, dateType='date'){
     dat <- datdate
 
     if(dateType =='date'){
-        dat <- ymd(dat)
+        dat <- suppressMessages(ymd(dat))
     } else if(dateType =='datetime'){
-        dat <- ymd_hms(dat)
+        dat <- suppressMessages(ymd_hms(dat))
     }
 
     if(identical(dat,datdate)){
