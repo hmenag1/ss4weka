@@ -45,41 +45,12 @@ moveCol <- function(df, from="last", to=1){
         df <- df[, xnum]
     }
 
-    if(alpha==omega) stop("to and from must be different")
-
-    for(i in 1:N){
-        if(i==omega){
-            xnum[i]<- alpha
-            w <- alpha+1
-            for (z in w:N){
-                xnum[i+1] <- z
-            }
-            #i <- i+1
-            #if (i> ncol(df)) break()
-        }else {
-            if(i < omega){
-                y <- i
-            } else {
-                y <- i-1
-            }
-            xnum[i] <- y
-        }
-    }
-
-    if (to>from){
-        df <- df[, N:1]
-    }
-
-    df<- df[,xnum]
-
-    return(df)
-
-
 }
 
 permOrder <- function(alpha, omega, cnum){
 
-    if(alpha==omega) stop("to and from must be different")
+    # if(alpha==omega) stop("to and from must be different")
+    if(alpha==omega) break()
     xnum <- vector(mode = "numeric")
     part2 <- seq(omega, alpha-1)
     if(alpha<cnum) part3 <- seq(alpha+1, cnum) else part3 <- NULL

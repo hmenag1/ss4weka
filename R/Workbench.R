@@ -34,4 +34,5 @@ ls <- filterBioByWords(tidydata, inclusions = inclusions, exclusions = exclusion
 
 eval1df <- ls[["eval1"]]
 
+ev <- moveCol(eval1df, 2,3)
 
