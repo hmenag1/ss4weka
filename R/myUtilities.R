@@ -58,3 +58,8 @@ permOrder <- function(alpha, omega, cnum){
     xnum <- c(part1, alpha, part2, part3)
     return(xnum)
 }
+
+
+
+
+
