@@ -30,9 +30,14 @@ exclusions<- paste("780.65|78065|DIABET|FROSTING|SEPSIS|THYROID|DIALYS|SEPTIC|CV
 # myUtilities AND
 # flagBioRecs
 ## before running the next line
+
 ls <- filterBioByWords(tidydata, inclusions = inclusions, exclusions = exclusions)
 
 eval1df <- ls[["eval1"]]
 
-ev <- moveCol(eval1df, 2,3)
+ev <- moveCol(eval1df)
 
+ct <- ls[["cut3"]]
+cutnames <- names(ct)
+changes <- data.frame("from"= c(49, 68,43, 86), "to"= c(3,4,5,6))
+ct <- moveCols(ct, changes)
