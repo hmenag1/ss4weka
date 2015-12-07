@@ -2,6 +2,7 @@
 
 
 tidy_BioSense <- function(df){
+    checklib("lubridate")
     ## Fix the date/time fields
     df$Create_Date_Time <- fixDateTime(df$Create_Date_Time, 'datetime')
     df$Update_Date_Time <- fixDateTime(df$Update_Date_Time, 'datetime')
