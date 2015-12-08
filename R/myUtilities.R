@@ -118,3 +118,30 @@ moveCols <- function(df, chng){
     return(df)
 
 }
+
+## Call the file browser window for selecting a file
+fetchFile <- function(){
+    fileInfo <- list()
+    rawdata <- file.choose(new = FALSE)
+    fi <- file.info(rawdata)
+    creatime <- fi$ctime
+    fp <- rownames(fi)
+    fpnew <- gsub("\\\\","/",fp)
+    fileInfo["filename"] <- rawdata
+    fileInfo[["details"]] <- fi
+    fileInfo["filepathR"] <- fpnew
+    fileInfo[["createTime"]] <- as.POSIXlt(creatime,origin="1970-01-01")
+    return(fileInfo)
+}
+
+
+savefile <- function(sfile, tfile, wd=TRUE, rnames=FALSE){
+    if(wd=TRUE){
+        write.csv(sfile, tfile, row.names = rnames)
+    }else {
+        fp <- choose.dir()
+        fp <- gsub("\\\\", "/", fp)
+        fn <- file.path(fp, paste0(tfile,".csv"))
+        write.csv(sfile, fn, row.names = rnames)
+    }
+}

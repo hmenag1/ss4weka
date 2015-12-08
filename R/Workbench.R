@@ -8,7 +8,7 @@ source(file.path(fundirs,"myUtilities.R"), echo = TRUE)
 source(file.path(fundirs,"prep.raw.data.R"), echo = TRUE)
 source(file.path(fundirs,"filterBioByWords.R"), echo = TRUE)
 source(file.path(fundirs,"bio_CustDisplay.R"), echo = TRUE)
-
+source(file.path(fundirs,"reviewProcs.R"), echo = TRUE)
 
 dfA <- read.csv(file.path("J:", "Documents", "Work", "KDHE", "Projects",
                           "Syndromic Surveillance", "SS Data",
@@ -53,3 +53,8 @@ columns <- c("Row_Number", "Facility_Name",
 bio_CustDisplay(dfB,"KS_100nmrm00-01-9520151109","Unique_Visiting_ID")
 
 bio_CustDisplay(dfB, 1, colList = columns)
+
+ct_s <- bio_Cust_df(ct)
+names(ct_s)
+
+hypo <- createReviewSet(ct_s, labcol="label", savename = "hypothermia_labeled")
