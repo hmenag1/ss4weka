@@ -1,7 +1,7 @@
-# prep.raw.data function
 
 
 tidy_BioSense <- function(df){
+    #browser()
     checklib("lubridate")
     ## Fix the date/time fields
     df$Create_Date_Time <- fixDateTime(df$Create_Date_Time, 'datetime')
@@ -43,16 +43,16 @@ tidy_BioSense <- function(df){
 
 
 fixDateTime <- function(datdate, dateType='date'){
-    if(grep("lubridate", search())){
-        library(lubridate)
-    }
+#     if(grep("lubridate", search())){
+#         library(lubridate)
+#    }
 
     dat <- datdate
 
     if(dateType =='date'){
-        dat <- suppressMessages(ymd(dat))
+        dat <- suppressMessages(lubridate::ymd(dat))
     } else if(dateType =='datetime'){
-        dat <- suppressMessages(ymd_hms(dat))
+        dat <- suppressMessages(lubridate::ymd_hms(dat))
     }
 
     if(identical(dat,datdate)){

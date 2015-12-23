@@ -35,14 +35,15 @@ exclusions<- paste("780.65|78065|DIABET|FROSTING|SEPSIS|THYROID|DIALYS|SEPTIC|CV
 
 ls <- filterBioByWords(tidydata, inclusions = inclusions, exclusions = exclusions)
 
-eval1df <- ls[["eval1"]]
+#eval1df <- ls[["eval1"]]
 
-ev <- moveCol(eval1df)
+#ev <- moveCol(eval1df)
 
 ct <- ls[["cut3"]]
-cutnames <- names(ct)
-changes <- data.frame("from"= c(49, 68,43, 86), "to"= c(3,4,5,6))
-ct <- moveCols(ct, changes)
+#cutnames <- names(ct)
+
+# changes <- data.frame("from"= c(49, 68,43, 86), "to"= c(3,4,5,6))
+# ct <- moveCols(ct, changes)
 
 
 columns <- c("Row_Number", "Facility_Name",
@@ -57,4 +58,19 @@ bio_CustDisplay(dfB, 1, colList = columns)
 ct_s <- bio_Cust_df(ct)
 names(ct_s)
 
+## Create label file for the first time
 hypo <- createReviewSet(ct_s, labcol="label", savename = "hypothermia_labeled")
+
+fi <- fetchFile()
+
+fn <- fi[["filepathR"]]
+hypolabel <- read.csv(fn, stringsAsFactors = FALSE)
+#hypolabel <- as.data.frame.list(hypolabel)
+
+#######Edit labeled data set
+
+
+savefile()
+
+
+

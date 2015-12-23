@@ -33,3 +33,22 @@ flagBioRecs <- function (df,terms, searchfields=NULL){
   return(dtab)
 
 }
+
+## GetTerms
+getTerms <- function(condition, incl_excl, utilities = "default", date = NULL){
+    if(utilities != "default"){
+        fi <- fetchFile(); #browser()
+        fn <- fi[["filepathR"]]
+    }else fn <- file.path("J:", "Documents", "Work", "KDHE", "Projects", "Syndromic Surveillance", "Utilities", "Search Terms History.xlsx")
+
+    wb <- XLConnect::loadWorkbook(fn)
+    ws <- XLConnect::readWorksheet(wb, sheet = condition, header = TRUE, colTypes = c("POSIXct", rep("character",3)))
+    ws <- dplyr::arrange(ws, desc(date))
+    if(incl_excl == "inclusions" | incl_excl == 2){
+        txt <- paste0(ws[1,2])
+    }else {
+        if (incl_excl == "exclusions" | incl_excl == 3) txt <- paste0(ws[1,3])
+    }
+
+    return(txt)
+}
