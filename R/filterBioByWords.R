@@ -1,7 +1,21 @@
-### filterBioByWords
 
+
+#' Selects records containing the inclusion keywords if they do not contain the
+#' exclusion keywords
+#'
+#' @param df a processed NSSP data.frame
+#' @param inclusions a string of keywords indicative of the condition of
+#'   interest
+#' @param exclusions a string of keywords if found in the records with inclusion
+#'   keywords disqualify those previously selected records
+#'
+#' @return a list containing 3 elements. cut1, a data.frame containing records
+#'   meeting the inclusion criteria. cut2, a data.frame containing the records
+#'   meeting the exclusion criteria within cut1. cut3, a data.frame containing
+#'   the final selection in the process. cut3 is a data.frame resulting from the
+#'   subtraction of cut2 from cut1.
+#' @export
 filterBioByWords <- function(df, inclusions=NULL, exclusions=NULL){
-    checklib("sqldf")
     lstEval <- list()
     eval1 <- flagBioRecs(df, terms=inclusions)
     lstEval[["eval1"]] <- xtable2df(eval1)
@@ -14,7 +28,7 @@ filterBioByWords <- function(df, inclusions=NULL, exclusions=NULL){
         cut1 <- sqldf("SELECT t2.* FROM eval1_num t1 LEFT JOIN df t2 ON t1.Unique_Visiting_ID = t2.Unique_Visiting_ID")
 
 
-        fips <- read.csv("FIPSPLUS.csv", stringsAsFactors = FALSE)
+        #fips <- read.csv("FIPSPLUS.csv", stringsAsFactors = FALSE)
 
         cut1 <- sqldf("SELECT t1.*, t2.COUNTY AS County_Name FROM cut1 t1 LEFT JOIN fips t2 ON t1.County=t2.FIPS")
 

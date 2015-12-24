@@ -1,5 +1,20 @@
 ## Create data set for review and classification
 
+
+#' Creates a data.frame containing records for manual review and labeling
+#'
+#' @param df a data.frame containing the raw data to be prepared for review
+#' @param labcol a string indicating the name of the label column
+#' @param colList a vector of column names to be included in the final review
+#'   data.frame.
+#' @param savename a string (without extension) indicating the name of the
+#'   review data.frame to be saved on the hard drive.
+#'
+#' @return a data.frame with a label column at the end.
+#' @export
+#'
+#' @details If the savename is not provided the file will be saved in the
+#'   working directory. The savename can contain the full path of the file.
 createReviewSet <- function(df, labcol= NULL, colList = NULL, savename=NULL){
     #browser()
     if(!is.null(labcol)){
@@ -13,26 +28,12 @@ createReviewSet <- function(df, labcol= NULL, colList = NULL, savename=NULL){
         df <- df[,sn]
     }
     if(!is.null(savename)){
-        savefile(sfile = df, tfile = savename, wd=FALSE)
-    }
+        savefile(sfile = df, tfile = "ReviewSet", wd=TRUE)
+    }else savefile(sfile = df, tfile = savename, wd=FALSE)
 
     return(df)
 }
 
 
-bio_Cust_df <- function (df, colList=NULL) {
-    if (is.null(colList)){
-        colList <- c("Unique_Visiting_ID", "Facility_Name",
-                     "Chief_Complaint","Triage_Notes", "Diagnosis_Text",
-                     "Diagnosis_Code", "Age", "Age_Units","Gender", "Earliest_Date",
-                     "County_Name")
 
-    }
-
-    blnames <- names(df) %in% colList
-
-    df <- df[, blnames]
-
-    return(df)
-}
 

@@ -1,8 +1,14 @@
 
 
+#' Tidies-up Raw NSSP Data
+#'
+#' @param df
+#'
+#' @return Returns a data frame with additional calculated fields.
+#' @export
+#' @details This function converts date and time fields to the right format for R. Also, it adds new calculated fields including one for the age of the patient in years (Age_years) and another one containing the concatenation of the literal fields (Text). In addition, it attempts to standardize the entries in the Age_Units field.
+
 tidy_BioSense <- function(df){
-    #browser()
-    checklib("lubridate")
     ## Fix the date/time fields
     df$Create_Date_Time <- fixDateTime(df$Create_Date_Time, 'datetime')
     df$Update_Date_Time <- fixDateTime(df$Update_Date_Time, 'datetime')
@@ -34,7 +40,7 @@ tidy_BioSense <- function(df){
     df$Age_years[which(df$Age_Units=="DAYS")] <- df$Age/(12*30.25)
 
     ## Combine Visit fields
-    df$text <- paste(df$Chief_Complaint, df$Triage_Notes,
+    df$Text <- paste(df$Chief_Complaint, df$Triage_Notes,
                      df$Diagnosis_Text, df$Diagnosis_Code)
 
     return(df)
@@ -42,10 +48,22 @@ tidy_BioSense <- function(df){
 }
 
 
+
+#' Converts Date Strings into R Date/Time Format
+#'
+#' @param datdate a string representing a date and/or time. NOTE: This
+#'   implementation is incomplete.
+#' @param dateType a string indicating the type of the date/time represented by
+#'   the string to be converted.
+#'
+#' @return an R datetime object
+#'
+#' @details This implementation is inclomplete at this time. For datdate
+#'   variable the acceptable values are 'date' and 'datetime'. Other options are
+#'   forthcomming.
+#'
+#' @export
 fixDateTime <- function(datdate, dateType='date'){
-#     if(grep("lubridate", search())){
-#         library(lubridate)
-#    }
 
     dat <- datdate
 

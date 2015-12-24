@@ -9,4 +9,4 @@ Description: This package tidies up raw data downloaded from the National Syndro
 License: GPL-3
 LazyData: TRUE
 Date: 2015-11-20
-Depends: hmUtils
+Depends: hmUtils, lubridate, ggplot2, sqldf
