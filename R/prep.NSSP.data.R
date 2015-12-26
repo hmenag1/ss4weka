@@ -2,7 +2,7 @@
 
 #' Tidies-up Raw NSSP Data
 #'
-#' @param df
+#' @param df a raw NSSP data.frame
 #'
 #' @return Returns a data frame with additional calculated fields.
 #' @export

@@ -16,6 +16,12 @@
 #'   events per day data.frame can be accessed with the label "events.per.day".
 #'   The number of events per day for a facility can be accessed with the label
 #'   "events.per.day.per.facility".
+#'
+#'   Note: fields parameter must be an integer vector. Otherwise it will be
+#'   ignored. In addition, the Unique visit ID field must also be included,
+#'   otherwise an error will occur.
+#'
+#'   Note: Other columns that are required in the fields vector includes Earliest_Date, Age,
 summaryofEvents <- function(condition, df, fields){
 
     eventslst <- list(tidydf=NULL,eventsperday=NULL, eventsdetails=NULL)

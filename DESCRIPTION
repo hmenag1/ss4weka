@@ -2,11 +2,19 @@ Package: ss4weka
 Type: Package
 Title: Tidying National Syndromic Surveillance Program Data for Use in Weka
 Version: 0.1
-Date: 2015-11-19
+Date: 2015-11-20
 Author: Henri Menager, MD, MPH
 Maintainer: Henri Menager <hmenager@hotmail.com>
-Description: This package tidies up raw data downloaded from the National Syndromic Surveillance Program Data for use in Weka.
+Description: This package tidies up raw data downloaded from the National
+    Syndromic Surveillance Program Data for use in Weka.
 License: GPL-3
 LazyData: TRUE
-Date: 2015-11-20
-Depends: hmUtils, lubridate, ggplot2, sqldf
+Depends:
+    hmUtils,
+    lubridate,
+    ggplot2,
+    sqldf,
+    data.table,
+    XLConnect,
+    dplyr
+RoxygenNote: 5.0.1
